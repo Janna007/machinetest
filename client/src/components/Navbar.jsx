@@ -28,7 +28,14 @@ function Navbar() {
             </td>
          
            <td colSpan={2}>{userData?.username}</td>
-           <td >Logout</td>
+          
+           <td >
+           <Link to={"/"}>
+            Logout  
+            </Link>
+             </td>
+          
+         
          </tr>
     
        
