@@ -6,6 +6,8 @@ function EmployList() {
 
   const [data,setData]=useState(null)
   const [count,setCount]=useState(0)
+  const [search,setSearch]=useState('')
+  const[filterData,setFilterData]=useState(null)
 
   useEffect( ()=>{
     const fetchData=async ()=>{
@@ -30,6 +32,16 @@ function EmployList() {
   },[])
 
 
+  useEffect(()=>{
+      const filterData= data?.filter((each)=>
+          each?.name?.toLowerCase().includes(search.toLowerCase())
+       )
+      
+       console.log(search)
+       console.log(filterData)
+       setFilterData(filterData)
+  },[search,data])
+
 
   return (
     <div>
@@ -46,7 +58,7 @@ function EmployList() {
         </tr>
         <tr>
               <td colSpan={8}>search</td>
-              <td><input type='search' name='search' placeholder='Enter search keyword' /></td>
+              <td><input type='search' name='search' placeholder='Enter search keyword' value={search}  onChange={(e)=>setSearch(e.target.value)} /></td>
             </tr>
 
             <tr  style={{backgroundColor:"grey"}}>
@@ -60,7 +72,7 @@ function EmployList() {
               <th>createDate</th>
               <th>Action</th>
             </tr>
-          {data?.map((each,index)=>(
+          {filterData?.map((each,index)=>(
               <tr>
               <td>{index+1}</td>
               <td>{each.name}</td>
