@@ -11,7 +11,7 @@ const createUsers=async(req,res,next)=>{
               password
         })
 
-        res.json(createUSer)
+        res.json({user:createUSer})
         
     } catch (error) {
         console.log(error)

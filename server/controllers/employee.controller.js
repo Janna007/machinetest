@@ -1,3 +1,4 @@
+import mongoose from "mongoose"
 import { Employee } from "../models/employee.model.js"
 
 
@@ -85,11 +86,20 @@ const updateEmp=async(req,res)=>{
 }
 
 const deleteEmp=async(req,res)=>{
-   const {id}=req.params
+   try {
+      const { id } = req.params;
+      const deletedEmployee = await Employee.findByIdAndDelete(id);
+  
+      if (!deletedEmployee) {
+        return res.status(404).json({ message: 'Employee not found' });
+      }
+  
+      res.status(200).json({ message: 'Employee deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
 
-  const employee= await Employee.findByIdAndDelete(id)
-
-  return res.status(200)
 }
 
 

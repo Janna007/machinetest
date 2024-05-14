@@ -6,6 +6,6 @@ const router=express.Router()
 router.post("/createEmp",createEmployee)
 router.get("/allEmployee",getEmployee)
 router.patch("/update/:id",updateEmp)
-router.delete("/delete:id",deleteEmp)
+router.delete("/delete/:id",deleteEmp)
 
 export default router
